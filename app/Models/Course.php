@@ -17,6 +17,7 @@ class Course extends Model
         'course_id',
         'title',
         'description',
+        'teacher',
     ];
 
     protected static function boot(){
