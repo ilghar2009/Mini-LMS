@@ -37,4 +37,9 @@ class Course extends Model
         return $this->hasMany(Lesson::class, 'course_id');
     }
 
+    public function orders(): BelongsToMany
+    {
+        return $this->belongsToMany(Order::class, 'order');
+    }
+
 }
