@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
@@ -54,6 +55,11 @@ class User extends Authenticatable
     public function orders(): BelongsToMany
     {
         return $this->belongsToMany(Order::class, 'order');
+    }
+
+    public function token(): HasOne
+    {
+        return $this->hasOne(Token_User::class, 'user_id');
     }
 
 }
