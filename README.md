@@ -6,10 +6,14 @@ It demonstrates how to design and implement **user roles, courses, lessons, and 
 ---
 
 ## 🔹 Features
-- **Role-based Access Control (RBAC)**
-    - Admin: Manage users, roles, courses, and lessons
-    - Teacher: Create and manage their own courses and lessons
-    - Student: Enroll in courses and view lessons
+
+[//]: # (- **Role-based Access Control &#40;RBAC&#41;**)
+
+[//]: # (    - Admin: Manage users, roles, courses, and lessons)
+
+[//]: # (    - Teacher: Create and manage their own courses and lessons)
+
+[//]: # (    - Student: Enroll in courses and view lessons)
 
 - **Entities & Relations**
     - Users ↔ Roles (Many-to-Many)
