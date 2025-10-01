@@ -52,14 +52,51 @@ class CourseController extends Controller
 
     public function update(Request $request, Course $course)
     {
-        //
+        //get token for get user
+            $token_c = $request->bearerToken();
+            $token = Token_User::where('token', $token_c)->first();
+
+
+        //check if this user create course change else return error
+
+            if(!$course->user?->user_id === $token->user?->user_id)
+                return response()->json([
+                    'error' => 'you are not authorized to access this page',
+                ], 403);
+            else
+            {
+                //check data and return error
+                    $request->validate([
+                        'title' => ['sometimes', 'string', 'max:255'],
+                        'description' => ['sometimes', 'string'],
+                        'meta_title' => ['sometimes', 'string', 'max:255'],
+                        'meta_description' => ['sometimes', 'string'],
+                    ]);
+
+                //update this course
+                    $course->update($request->all());
+
+                return response()->json([
+                    'course' => $course,
+                    'message' => 'Course updated successfully',
+                ], 201);
+            }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Course $course)
+    public function destroy(Course $course, Request $request)
     {
-        //
+        $token_c = $request->bearerToken();
+        $token = Token_User::where('token', $token_c)->first();
+
+        if($course->user->user_id === $token->user?->user_id) {
+            $course->delete();
+
+            return response()->json([
+                'message' => 'Course deleted successfully',
+            ], 200);
+        }else
+            return response()->json([
+                'error' => 'you are not authorized to access this page',
+            ], 403);
     }
 }
