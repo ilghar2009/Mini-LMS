@@ -15,7 +15,9 @@ return new class extends Migration
             $table->string('course_id');
             $table->string('title')->unique();
             $table->text('description');
-            $table->string('teacher_id');
+            $table->string('meta_title')->nullable();
+            $table->text('meta_description')->nullable();
+            $table->string('user_id');
             $table->timestamps();
         });
     }

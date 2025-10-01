@@ -18,7 +18,9 @@ class Course extends Model
         'course_id',
         'title',
         'description',
-        'teacher',
+        'meta_title',
+        'meta_description',
+        'user_id',
     ];
 
     protected static function boot(){

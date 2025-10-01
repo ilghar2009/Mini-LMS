@@ -19,6 +19,8 @@ class CourseController extends Controller
             $request->validate([
                 'title' => ['required', 'string', 'max:255'],
                 'description' => ['required', 'string'],
+                'meta_title' => ['sometimes', 'string', 'max:255'],
+                'meta_description' => ['sometimes', 'string'],
             ]);
 
         //get token => get user;
@@ -31,7 +33,9 @@ class CourseController extends Controller
             $course = Course::create([
                'title' => $request->title,
                'description' => $request->description,
-               'teacher' => $user->user_id,
+               'meta_title' => $request->meta_title,
+               'user_id' => $user->user_id,
+               'meta_description' => $request->meta_description,
             ]);
 
         return response()->json([
@@ -46,15 +50,6 @@ class CourseController extends Controller
         //
     }
 
-
-    public function edit(Course $course)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Course $course)
     {
         //
