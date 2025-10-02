@@ -12,7 +12,7 @@ class Lesson extends Model
         'meta_title',
         'meta_description',
         'video',
-        'content',
+        'contents',
     ];
 
     public function course(): BelongsTo
