@@ -47,6 +47,12 @@ class LessonController extends Controller
                         'meta_title' => $request->meta_title??null,
                         'meta_description' => $request->meta_description??null,
                     ]);
+
+                return response()->json([
+                    'lesson' => $lesson,
+                    'message' => 'Lesson created successfully.'
+                ], 201);
+
             }else
                 return response()->json([
                     'error' => 'you are not authorized to access this page',
