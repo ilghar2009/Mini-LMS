@@ -130,8 +130,24 @@ class LessonController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Lesson $lesson)
+    public function destroy(Lesson $lesson, Request $request)
     {
-        //
+
+        //get user with token
+        $tocken_c = $request->bearerToken();
+        $token = Token_User::where('token', $tocken_c)->first();
+
+        //get course
+        $course = Course::where('course_id', $request->course_id)->get();
+
+        if($course->user_id === $token->user_id) {
+            $lesson->delete();
+            return response()->json([
+                'message' => 'Lesson deleted successfully.'
+            ], 200);
+        }else
+            return response()->json([
+                'error' => 'you are not authorized to access this page',
+            ], 403);
     }
 }
