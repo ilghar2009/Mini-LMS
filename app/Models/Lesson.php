@@ -9,7 +9,9 @@ class Lesson extends Model
 {
     protected $fillable = [
         'course_id',
-        'title',
+        'meta_title',
+        'meta_description',
+        'video',
         'content',
     ];
 

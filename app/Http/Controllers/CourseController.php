@@ -10,7 +10,7 @@ class CourseController extends Controller
 {
     public function index()
     {
-        //
+
     }
 
     public function store(Request $request)
