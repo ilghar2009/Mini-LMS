@@ -8,10 +8,34 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
+    //Show all Course
     public function index()
     {
-
+        //
     }
+
+    //Show lessons of one Course
+    public function show(Request $request){
+
+        //get course
+            $course = Course::where('course_id', $request->course_id);
+
+            $lessons = $course->lessons
+                ->map(function($lesson){
+                    return [
+                        'id' => $lesson->id,
+                        'title' => $lesson->meta_title,
+                        'description' => $lesson->meta_description,
+                        'course' => $lesson->course->title,
+                    ];
+                });
+
+            return response()->json([
+                'course' => $course,
+                'lessons' => $lessons
+            ], 200);
+    }
+
 
     public function store(Request $request)
     {
@@ -45,10 +69,6 @@ class CourseController extends Controller
 
     }
 
-    public function show(Course $course)
-    {
-        //
-    }
 
     public function update(Request $request, Course $course)
     {
