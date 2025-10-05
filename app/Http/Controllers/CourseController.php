@@ -18,7 +18,11 @@ class CourseController extends Controller
     public function show(Request $request){
 
         //get course
-            $course = Course::where('course_id', $request->course_id);
+            $course = Course::where('course_id', $request->course_id)->first();
+
+            if(!$course)
+                return response()->json(['error'=>'course not found'],404);
+
 
             $lessons = $course->lessons
                 ->map(function($lesson){
