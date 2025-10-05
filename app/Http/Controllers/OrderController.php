@@ -47,20 +47,19 @@ class OrderController extends Controller
           $course_id = $request->input('course_id');
 
         //check if user enroll in this course unenroll
-        if($user->courses->where('course_id', $course_id)->exists()) {
+            if($user->courses->where('course_id', $course_id)->exists()) {
 
-            $user->courses()
-                ->where('course_id', $course_id)
-                ->detach($course_id);
+                $user->courses()
+                    ->where('course_id', $course_id)
+                    ->detach($course_id);
 
-            return response()->json([
-                'message' => 'User successfully unenrolled in this course.'
-            ], 200);
+                return response()->json([
+                    'message' => 'User successfully unenrolled in this course.'
+                ], 200);
 
-        }else
-            return \response()->json([
-                'error' => 'You are not enrolled in this course.'
-            ], 404);
+            }else
+                return \response()->json([
+                    'error' => 'You are not enrolled in this course.'
+                ], 404);
     }
-
 }
